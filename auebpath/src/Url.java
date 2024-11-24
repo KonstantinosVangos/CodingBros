@@ -1,4 +1,4 @@
-package com.karkinos;
+package auebpath;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

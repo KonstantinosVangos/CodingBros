@@ -1,4 +1,4 @@
-package com.karkinos;
+package auebpath;
 
 import java.util.ArrayList;
 import java.util.List;
