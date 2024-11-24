@@ -10,10 +10,10 @@ public class Main {
             System.out.println(x.getStopXY("400075")[1]);
             System.out.println(x.getLineName("871"));
             System.out.println(x.getRouteName("1881"));
-            for (String z : y.getStopInfo("240071")) {
+            for (String z : y.getStopInfo("240086")) {
                 System.err.println(z);
             }
-            overpassAPI.fetchOverpassAPIData();
+            //overpassAPI.fetchOverpassAPIData();
             j.location();
     }
 }

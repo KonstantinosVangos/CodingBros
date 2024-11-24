@@ -27,7 +27,8 @@ public class Location {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Δημιουργία του JPanel με φόντο εικόνας (στο κέντρο)
+        // Δημιουργία του JPanel με φόντο εικόνας (στο κέντρο)+
+
         JPanel imagePanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
