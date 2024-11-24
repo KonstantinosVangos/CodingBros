@@ -1,4 +1,4 @@
-package com.auebpath;
+package auebpath;
 
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
