@@ -1,4 +1,4 @@
-package auebpath;
+package com.auebproject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

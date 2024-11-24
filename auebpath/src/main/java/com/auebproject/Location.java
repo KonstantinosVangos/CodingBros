@@ -1,8 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
+package com.auebproject;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Location {
-    public static void main(String[] args) {
+    public void location() {
         // Δημιουργία του αρχικού παραθύρου
         JFrame frame = new JFrame("Τοποθεσία Χρήστη");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

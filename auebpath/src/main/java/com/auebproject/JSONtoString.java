@@ -1,4 +1,4 @@
-package auebpath;
+package com.auebproject;
 
 import java.util.ArrayList;
 import java.util.List;
