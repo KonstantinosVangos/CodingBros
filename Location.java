@@ -6,21 +6,52 @@ public class Location {
         // Δημιουργία του αρχικού παραθύρου
         JFrame frame = new JFrame("Τοποθεσία Χρήστη");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
-        frame.setLayout(new BorderLayout());
+        frame.setSize(400, 500);
 
-        // Δημιουργία ετικέτας με το μήνυμα
-        JLabel label = new JLabel("Πληκτρολογήστε την τοποθεσία σας:");
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        frame.add(label, BorderLayout.NORTH);
+        // Δημιουργία κεντρικού panel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        // Δημιουργία πεδίου κειμένου όπου ο χρήστης μπορεί να πληκτρολογήσει
+        // Δημιουργία του JPanel με φόντο εικόνας (στο κέντρο)
+        JPanel imagePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Φόρτωση της εικόνας
+                ImageIcon backgroundImage = new ImageIcon("background.jpg");
+                int x = (getWidth() - backgroundImage.getIconWidth()) / 2; // Κεντρική στο X
+                int y = (getHeight() - backgroundImage.getIconHeight()) / 2; // Κεντρική στο Y
+                g.drawImage(backgroundImage.getImage(), x, y, this);
+            }
+        };
+        imagePanel.setPreferredSize(new Dimension(400, 250)); // Ορίζει το μέγεθος της εικόνας
+        mainPanel.add(imagePanel, BorderLayout.CENTER);
+
+        // Ετικέτα κάτω από την εικόνα με ανοιχτό λαχανί φόντο
+        JLabel messageLabel = new JLabel("Πληκτρολογήστε πού είστε:");
+        messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(new Color(245, 245, 220)); // Ανοιχτό λαχανί χρώμα
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Περιθώρια γύρω από το κείμενο
+        mainPanel.add(messageLabel, BorderLayout.NORTH);
+
+        // Δημιουργία πάνελ για πεδίο κειμένου και κουμπί (κάτω από την εικόνα)
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BorderLayout());
+        inputPanel.setPreferredSize(new Dimension(400, 200));
+
+        // Πεδίο κειμένου
         JTextField textField = new JTextField();
-        frame.add(textField, BorderLayout.CENTER);
+        textField.setMargin(new Insets(10, 10, 10, 10)); // Αφή στα πλαϊνά
+        inputPanel.add(textField, BorderLayout.CENTER);
 
-        // Δημιουργία κουμπιού υποβολής
+        // Κουμπί υποβολής με έντονο γαλάζιο χρώμα
         JButton submitButton = new JButton("Υποβολή");
-        frame.add(submitButton, BorderLayout.SOUTH);
+        submitButton.setBackground(new Color(51, 153, 255)); // Γαλάζιο
+        submitButton.setForeground(Color.WHITE);
+        submitButton.setFont(new Font("Arial", Font.BOLD, 14));
+        inputPanel.add(submitButton, BorderLayout.SOUTH);
 
         // Ενέργεια όταν ο χρήστης πατήσει το κουμπί υποβολής
         submitButton.addActionListener(e -> {
@@ -28,6 +59,12 @@ public class Location {
             frame.dispose(); // Κλείνει το αρχικό παράθυρο
             openDestinationWindow(location); // Καλεί το νέο παράθυρο
         });
+
+        // Προσθήκη πάνελ στο κύριο παράθυρο
+        mainPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        // Προσθήκη του κύριου panel στο JFrame
+        frame.setContentPane(mainPanel);
 
         // Εμφάνιση του παραθύρου
         frame.setVisible(true);
@@ -38,29 +75,67 @@ public class Location {
         // Δημιουργία του νέου παραθύρου
         JFrame destinationFrame = new JFrame("Νέα Τοποθεσία");
         destinationFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        destinationFrame.setSize(400, 200);
-        destinationFrame.setLayout(new BorderLayout());
+        destinationFrame.setSize(400, 500);
 
-        // Ετικέτα με το μήνυμα για την επιθυμητή τοποθεσία
-        JLabel destinationLabel = new JLabel("Πληκτρολογήστε την τοποθεσία που επιθυμείτε να πάτε:");
-        destinationLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        destinationFrame.add(destinationLabel, BorderLayout.NORTH);
+        // Δημιουργία κεντρικού panel
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        // Πεδίο κειμένου για την επιθυμητή τοποθεσία
-        JTextField destinationField = new JTextField();
-        destinationFrame.add(destinationField, BorderLayout.CENTER);
+        // Δημιουργία του JPanel με φόντο εικόνας (στο κέντρο)
+        JPanel imagePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Φόρτωση της εικόνας
+                ImageIcon backgroundImage = new ImageIcon("background.jpg");
+                int x = (getWidth() - backgroundImage.getIconWidth()) / 2; // Κεντρική στο X
+                int y = (getHeight() - backgroundImage.getIconHeight()) / 2; // Κεντρική στο Y
+                g.drawImage(backgroundImage.getImage(), x, y, this);
+            }
+        };
+        imagePanel.setPreferredSize(new Dimension(400, 250)); // Ορίζει το μέγεθος της εικόνας
+        mainPanel.add(imagePanel, BorderLayout.CENTER);
 
-        // Κουμπί υποβολής
-        JButton destinationSubmitButton = new JButton("Υποβολή");
-        destinationFrame.add(destinationSubmitButton, BorderLayout.SOUTH);
+        // Ετικέτα κάτω από την εικόνα με ανοιχτό λαχανί φόντο
+        JLabel messageLabel = new JLabel("Πληκτρολογήστε πού θέλετε να πάτε:");
+        messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        messageLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        messageLabel.setOpaque(true);
+        messageLabel.setBackground(new Color(245, 245, 220)); // Ανοιχτό λαχανί χρώμα
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Περιθώρια γύρω από το κείμενο
+        mainPanel.add(messageLabel, BorderLayout.NORTH);
 
-        // Ενέργεια όταν ο χρήστης πατήσει το κουμπί υποβολής στο νέο παράθυρο
-        destinationSubmitButton.addActionListener(e -> {
-            String destination = destinationField.getText();
+        // Δημιουργία πάνελ για πεδίο κειμένου και κουμπί (κάτω από την εικόνα)
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BorderLayout());
+        inputPanel.setPreferredSize(new Dimension(400, 200));
+
+        // Πεδίο κειμένου
+        JTextField textField = new JTextField();
+        textField.setMargin(new Insets(10, 10, 10, 10)); // Αφή στα πλαϊνά
+        inputPanel.add(textField, BorderLayout.CENTER);
+
+        // Κουμπί υποβολής με έντονο γαλάζιο χρώμα
+        JButton submitButton = new JButton("Υποβολή");
+        submitButton.setBackground(new Color(51, 153, 255)); // Γαλάζιο
+        submitButton.setForeground(Color.WHITE);
+        submitButton.setFont(new Font("Arial", Font.BOLD, 14));
+        inputPanel.add(submitButton, BorderLayout.SOUTH);
+
+        // Ενέργεια όταν ο χρήστης πατήσει το κουμπί υποβολής
+        submitButton.addActionListener(e -> {
+            String destination = textField.getText();
             JOptionPane.showMessageDialog(destinationFrame, "Από: " + currentLocation + "\nΠρος: " + destination);
         });
+
+        // Προσθήκη πάνελ στο κύριο παράθυρο
+        mainPanel.add(inputPanel, BorderLayout.SOUTH);
+
+        // Προσθήκη του κύριου panel στο JFrame
+        destinationFrame.setContentPane(mainPanel);
 
         // Εμφάνιση του νέου παραθύρου
         destinationFrame.setVisible(true);
     }
 }
+
