@@ -1,4 +1,4 @@
-package com.karkinos;
+package auebpath;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
