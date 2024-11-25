@@ -34,7 +34,8 @@ public class Location {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Φόρτωση της εικόνας
-                ImageIcon backgroundImage = new ImageIcon("background.jpg");
+                ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/images/background.jpg"));
+                //ImageIcon backgroundImage = new ImageIcon("/background.jpg");
                 int x = (getWidth() - backgroundImage.getIconWidth()) / 2; // Κεντρική στο X
                 int y = (getHeight() - backgroundImage.getIconHeight()) / 2; // Κεντρική στο Y
                 g.drawImage(backgroundImage.getImage(), x, y, this);
@@ -103,13 +104,16 @@ public class Location {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Φόρτωση της εικόνας
-                ImageIcon backgroundImage = new ImageIcon("background.jpg");
+                ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/images/background.jpg"));
+                //ImageIcon backgroundImage = new ImageIcon("background.jpg");
+                //ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/images/background.jpg"));
                 int x = (getWidth() - backgroundImage.getIconWidth()) / 2; // Κεντρική στο X
                 int y = (getHeight() - backgroundImage.getIconHeight()) / 2; // Κεντρική στο Y
                 g.drawImage(backgroundImage.getImage(), x, y, this);
             }
         };
         imagePanel.setPreferredSize(new Dimension(400, 250)); // Ορίζει το μέγεθος της εικόνας
+       // mainPanel.add(submitButton, BorderLayout.SOUTH);
         mainPanel.add(imagePanel, BorderLayout.CENTER);
 
         // Ετικέτα κάτω από την εικόνα με ανοιχτό λαχανί φόντο

@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 
 public class overpassAPI  {
-    public static  void fetchOverpassAPIData() {
+    public static void fetchOverpassAPIData() {
     try {
     
         //URL with the Overpass API query
@@ -36,7 +36,7 @@ public class overpassAPI  {
         
         //Go through the elements
         for (int i = 0; i < graphElements.length(); i ++) {
-        JSONObject graphElement = graphElements.getJSONObject(1);
+        JSONObject graphElement = graphElements.getJSONObject(i);
         int id = graphElement.getInt("id");
         double lat = graphElement.getDouble("lat");
         double lon = graphElement.getDouble("lon");
