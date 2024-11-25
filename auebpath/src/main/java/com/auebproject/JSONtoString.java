@@ -24,13 +24,18 @@ public class JSONtoString extends CodeToName {
         List<String> stopInfoList = new ArrayList<>();
         String endpoint = "?act=getStopArrivals&p1=" + stopCode;
         String urlItem = Url.urlCreator(endpoint);
-        for (int i = 0; i < getExactInfo(urlItem, "route_code", "btime2").size(); i++) {
-            String routeOrTime = getExactInfo(urlItem, "route_code", "btime2").get(i);
-            if (i%2 == 0) {
-                stopInfoList.add(getRouteName(routeOrTime));
-            } else {
-                stopInfoList.add(routeOrTime);
-            } 
+        stopInfoList.add(getStopName(stopCode));
+        if (!"null".equals(urlItem)) {
+            for (int i = 0; i < getExactInfo(urlItem, "route_code", "btime2").size(); i++) {
+                String routeOrTime = getExactInfo(urlItem, "route_code", "btime2").get(i);
+                if (i%2 == 0) {
+                    stopInfoList.add(getRouteName(routeOrTime));
+                } else {
+                    stopInfoList.add(routeOrTime);
+                } 
+            }
+        } else {
+            stopInfoList.add("null");
         }
         return stopInfoList;
     }
