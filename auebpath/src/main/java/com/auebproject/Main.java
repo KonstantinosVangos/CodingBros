@@ -13,7 +13,7 @@ public class Main {
         for (String z : y.getStopInfo("240033")) {
             System.out.println(z);
         }
-        System.out.println("37.951596, 23.695745");
         j.location();
     }
 }
+
