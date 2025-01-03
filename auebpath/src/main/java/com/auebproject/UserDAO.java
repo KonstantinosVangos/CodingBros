@@ -1,4 +1,4 @@
-package exercise4_2024_2025_8220085;
+package com.auebproject;
 
 import java.sql.*;
 import java.util.ArrayList;
