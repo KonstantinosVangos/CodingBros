@@ -1,4 +1,4 @@
-package com.karkinos;
+package com.auebproject;
 
 import java.util.List;
 import java.util.Map;
