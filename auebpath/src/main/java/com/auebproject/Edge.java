@@ -1,4 +1,4 @@
-package com.karkinos;
+package com.auebproject;
 
 class Edge {
     public Node from;
