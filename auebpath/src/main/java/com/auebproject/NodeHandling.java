@@ -1,16 +1,17 @@
-package com.auebproject;
+package com.karkinos;
 
+import java.util.List;
 import java.util.Map;
 
 public class NodeHandling {
     
-    public static Node findClosestNode(Map<Long, Node> nodes, double targetLat, double targetLon) {
+    public static Node findClosestNode(Map<String, Node> nodes, double targetLat, double targetLon) {
         Node closestNode = null;
         double minDistance = Double.MAX_VALUE;
 
         for (Node node : nodes.values()) {
             // Calculate the distance between the node and the target coordinates
-            double distance = calculateDistance(node, new Node("-1", targetLat, targetLon));
+            double distance = calculateDistance(node, targetLat, targetLon);
             if (distance < minDistance) {
                 minDistance = distance;
                 closestNode = node;
@@ -20,20 +21,37 @@ public class NodeHandling {
         return closestNode;
     }
 
+    public static Node findClosestNode(List<Edge> edges, double targetLat, double targetLon) {
+    Node closestNode = null;
+    double minDistance = Double.MAX_VALUE;
+
+    // Iterate over all edges and compare both "from" and "to" nodes
+    for (Edge edge : edges) {
+        // Check the "from" node
+        Node fromNode = edge.getFrom();
+        double distanceFrom = calculateDistance(fromNode, targetLat, targetLon);
+        if (distanceFrom < minDistance) {
+            minDistance = distanceFrom;
+            closestNode = fromNode;
+        }
+
+        // Check the "to" node
+        Node toNode = edge.getTo();
+        double distanceTo = calculateDistance(toNode, targetLat, targetLon);
+        if (distanceTo < minDistance) {
+            minDistance = distanceTo;
+            closestNode = toNode;
+        }
+    }
+
+    return closestNode;
+}
+
     public static double calculateDistance(Node from, Node to) {
-        final double R = 6371; // Radius of the Earth in kilometers
-        double lat1 = Math.toRadians(from.lat);
-        double lon1 = Math.toRadians(from.lon);
-        double lat2 = Math.toRadians(to.lat);
-        double lon2 = Math.toRadians(to.lon);
+        return Math.sqrt(Math.pow(from.getLat() - to.getLat(), 2) + Math.pow(from.getLon() - to.getLon(), 2));
+    }
 
-        double dLat = lat2 - lat1;
-        double dLon = lon2 - lon1;
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                   Math.cos(lat1) * Math.cos(lat2) *
-                   Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-        return R * c * 1000; // Convert to meters
+    private static double calculateDistance(Node node, double lat, double lon) {
+        return Math.sqrt(Math.pow(node.getLat() - lat, 2) + Math.pow(node.getLon() - lon, 2));
     }
 }

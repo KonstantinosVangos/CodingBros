@@ -1,4 +1,4 @@
-package com.auebproject;
+package com.karkinos;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +16,7 @@ public class MapCreator {
     public static Map<String, Node> parseNodesFromGeoJson() throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(new File("auebpath/src/main/resources/athens_transport_data.geojson"));
+        JsonNode root = mapper.readTree(new File("prostati/src/main/resources/athens_transport_data.geojson"));
         var cords = new CodeToName();
         JsonNode elements = root.get("features");
         Map<String, Node> nodes = new HashMap<>();
@@ -41,56 +42,99 @@ public class MapCreator {
         }
         return nodes;
     }
+   /* 
+    public static List<Edge> parseEdgesFromGeoJson() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(new File("prostati/src/main/resources/athens_transport_data.geojson"));
+        JsonNode elements = root.get("features");
+        List<Edge> edges = new ArrayList<>();
+        Map<String, Node> nodeMap = new HashMap<>();
+        AtomicInteger idCounter = new AtomicInteger(1); // Use AtomicInteger for mutable counter
 
-    // Method to parse the GeoJSON file and build the graph (edges between nodes)
-    public static Map<Long, List<Edge>> parseGraphFromGeoJson(File jsonFile, Map<Long, Node> nodes) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode rootNode = objectMapper.readTree(jsonFile);
-        var calc = new NodeHandling();
-        Map<Long, List<Edge>> graph = new HashMap<>();
+        for (JsonNode element : elements) {
+            if ("LineString".equals(element.get("geometry").get("type").asText())) {
+                JsonNode coordinates = element.get("geometry").get("coordinates");
+                Node prevNode = null;
 
-        // Parse ways (LineString type) and create edges between nodes
-        for (JsonNode element : rootNode.get("features")) {
-            if (element.has("geometry")) {
-                JsonNode geometry = element.get("geometry");
+                for (JsonNode coordinate : coordinates) {
+                    double lon = coordinate.get(0).asDouble();
+                    double lat = coordinate.get(1).asDouble();
 
-                if (geometry.has("type") && geometry.get("type").asText().equals("LineString")) {
-                    // Way type (path between nodes)
-                    JsonNode coordinates = geometry.get("coordinates");
-                    long wayId = -1;
-                    String nodeId = "-1";
-                    if (element.has("properties") && element.get("properties").has("id")) {
-                        wayId = element.get("properties").get("id").asLong();
-                        nodeId = element.get("properties").get("id").toString();
+                    // Generate a unique key for the coordinate
+                    String key = String.format("%.6f,%.6f", lat, lon); // Round coordinates for precision
+
+                    // Retrieve or create a node with a unique ID
+                    Node currentNode = nodeMap.computeIfAbsent(key, k -> new Node("L" + idCounter.getAndIncrement(), lat, lon));
+
+                    if (prevNode != null && !prevNode.id.equals(currentNode.id)) {
+                        double distance = NodeHandling.calculateDistance(prevNode, currentNode);
+                        edges.add(new Edge(prevNode, currentNode, distance));
                     }
 
-                    List<Node> wayNodes = new ArrayList<>();
-                    for (JsonNode coord : coordinates) {
-                        double lon = coord.get(0).asDouble();
-                        double lat = coord.get(1).asDouble();
-                        Node currentNode = new Node(nodeId, lat, lon);
-                        wayNodes.add(currentNode);
-                        nodes.putIfAbsent(wayId, currentNode);
-                    }
-
-                    // Create edges between consecutive nodes in the way
-                    for (int i = 0; i < wayNodes.size() - 1; i++) {
-                        Node from = wayNodes.get(i);
-                        Node to = wayNodes.get(i + 1);
-                        double distance = calc.calculateDistance(from, to);
-                        Edge edge = new Edge(from, to, distance);
-                        graph.putIfAbsent(Long.parseLong(from.id)
-                        , new ArrayList<>());
-                        graph.get(from.id).add(edge);
-
-                        // If the graph is undirected, add the reverse edge as well
-                        Edge reverseEdge = new Edge(to, from, distance);
-                        graph.putIfAbsent(Long.parseLong(to.id), new ArrayList<>());
-                        graph.get(to.id).add(reverseEdge);
-                    }
+                    prevNode = currentNode;
                 }
             }
         }
-        return graph;
+        return edges;
+    } */
+
+    public static List<Edge> parseEdgesFromGeoJson() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(new File("prostati/src/main/resources/athens_transport_data.geojson"));
+        JsonNode elements = root.get("features");
+        List<Edge> edges = new ArrayList<>();
+        Map<String, Node> nodeMap = new HashMap<>();
+        AtomicInteger idCounter = new AtomicInteger(1); // Use AtomicInteger for mutable counter
+    
+        for (JsonNode element : elements) {
+            String geometryType = element.get("geometry").get("type").asText();
+    
+            if ("LineString".equals(geometryType)) {
+                // Process LineString as before
+                JsonNode coordinates = element.get("geometry").get("coordinates");
+                edges.addAll(processCoordinates(coordinates, nodeMap, idCounter));
+            } else if ("Polygon".equals(geometryType)) {
+                // Process Polygon by using the exterior ring
+                JsonNode coordinates = element.get("geometry").get("coordinates");
+                if (coordinates.isArray() && coordinates.size() > 0) {
+                    // Use the first ring (exterior boundary) for edges
+                    JsonNode exteriorRing = coordinates.get(0);
+                    edges.addAll(processCoordinates(exteriorRing, nodeMap, idCounter));
+                }
+            }
+        }
+        return edges;
     }
+    
+    /**
+     * Processes a set of coordinates to create edges.
+     * @param coordinates The coordinates array.
+     * @param nodeMap A map for tracking unique nodes.
+     * @param idCounter A counter for generating unique IDs.
+     * @return A list of edges created from the coordinates.
+     */
+    private static List<Edge> processCoordinates(JsonNode coordinates, Map<String, Node> nodeMap, AtomicInteger idCounter) {
+        List<Edge> edges = new ArrayList<>();
+        Node prevNode = null;
+    
+        for (JsonNode coordinate : coordinates) {
+            double lon = coordinate.get(0).asDouble();
+            double lat = coordinate.get(1).asDouble();
+    
+            // Generate a unique key for the coordinate
+            String key = String.format("%.6f,%.6f", lat, lon);
+    
+            // Retrieve or create a node with a unique ID
+            Node currentNode = nodeMap.computeIfAbsent(key, k -> new Node("L" + idCounter.getAndIncrement(), lat, lon));
+    
+            if (prevNode != null && !prevNode.id.equals(currentNode.id)) {
+                double distance = NodeHandling.calculateDistance(prevNode, currentNode);
+                edges.add(new Edge(prevNode, currentNode, distance));
+            }
+    
+            prevNode = currentNode;
+        }
+        return edges;
+    }
+    
 }
