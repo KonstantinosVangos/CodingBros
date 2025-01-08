@@ -1,4 +1,4 @@
-package com.karkinos;
+package com.auebproject;
 
 import java.io.File;
 import java.io.IOException;
