@@ -1,4 +1,4 @@
-package com.auebproject;
+package com.karkinos;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -50,3 +50,4 @@ public class Url {
         }
     }
 }
+
