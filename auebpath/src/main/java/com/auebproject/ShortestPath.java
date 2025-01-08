@@ -1,4 +1,4 @@
-package com.karkinos;
+package com.auebproject;
 
 //import java.lang.classfile.components.ClassPrinter;
 import java.util.Collections;
