@@ -1,4 +1,4 @@
-package com.karkinos;
+package com.auebproject;
 
 class Node {
     public String id;
