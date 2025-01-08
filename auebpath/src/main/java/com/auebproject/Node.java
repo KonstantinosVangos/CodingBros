@@ -1,4 +1,4 @@
-package com.auebproject;
+package com.karkinos;
 
 class Node {
     public String id;
@@ -9,6 +9,18 @@ class Node {
         this.id = id;
         this.lat = lat;
         this.lon = lon;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public double getLon() {
+        return lon;
     }
 
     @Override
