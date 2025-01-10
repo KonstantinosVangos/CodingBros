@@ -39,4 +39,10 @@ public class JSONtoString extends CodeToName {
         }
         return stopInfoList;
     }
+
+    public String test(String stopCode) {
+        String endpoint = "?act=getStopArrivals&p1=" + stopCode;
+        String urlItem = Url.urlCreator(endpoint);
+        return urlItem;
+    }
 }
