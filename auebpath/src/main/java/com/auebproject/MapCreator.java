@@ -16,7 +16,7 @@ public class MapCreator {
     public static Map<String, Node> parseNodesFromGeoJson() throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(new File("prostati/src/main/resources/athens_transport_data.geojson"));
+        JsonNode root = mapper.readTree(new File("auebpath/src/main/resources/athens_transport_data.geojson"));
         var cords = new CodeToName();
         JsonNode elements = root.get("features");
         Map<String, Node> nodes = new HashMap<>();
@@ -45,7 +45,7 @@ public class MapCreator {
 
     public static List<Edge> parseEdgesFromGeoJson() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(new File("prostati/src/main/resources/athens_transport_data3.geojson"));
+        JsonNode root = mapper.readTree(new File("auebpath/src/main/resources/athens_transport_data3.geojson"));
         JsonNode elements = root.get("features");
         List<Edge> edges = new ArrayList<>();
         Map<String, Node> nodeMap = new HashMap<>();

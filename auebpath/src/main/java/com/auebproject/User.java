@@ -1,5 +1,5 @@
 
-package exercise4_2024_2025_8220085;
+package com.auebproject;
 
 public class User {
     
