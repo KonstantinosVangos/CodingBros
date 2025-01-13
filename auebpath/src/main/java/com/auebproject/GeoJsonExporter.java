@@ -6,23 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 public class GeoJsonExporter {
-
-    /**
-     * Exports a shortest path to GeoJSON format.
-     *
-     * @param pathNodes      List of nodes representing the shortest path.
-     * @param outputFilePath The file path where the GeoJSON will be saved.
-     * @throws IOException If there's an error writing the file.
-     */
     public static void exportShortestPathToGeoJson(List<Node> pathNodes, String outputFilePath) throws IOException {
         if (pathNodes == null || pathNodes.isEmpty()) {
             throw new IllegalArgumentException("Path nodes cannot be null or empty.");
+        }
+        if (outputFilePath == null || outputFilePath.isBlank()) {
+            throw new IllegalArgumentException("Output file path cannot be null or blank.");
         }
 
         StringBuilder geoJson = new StringBuilder("{ \"type\": \"FeatureCollection\", \"features\": [");
 
         // Add Nodes
         for (Node node : pathNodes) {
+            if (node == null) {
+                throw new IllegalArgumentException("Path nodes list contains a null node.");
+            }
             geoJson.append("{")
                 .append("\"type\": \"Feature\",")
                 .append("\"geometry\": {")
@@ -60,14 +58,29 @@ public class GeoJsonExporter {
         // Write to file
         try (FileWriter writer = new FileWriter(outputFilePath)) {
             writer.write(geoJson.toString());
+        } catch (IOException e) {
+            throw new IOException("Failed to write GeoJSON to file: " + outputFilePath, e);
         }
     }
 
     public static void exportToGeoJson(Map<String, Node> nodes, List<Edge> edges, String outputFilePath) throws IOException {
+        if (nodes == null || nodes.isEmpty()) {
+            throw new IllegalArgumentException("Nodes map cannot be null or empty.");
+        }
+        if (edges == null || edges.isEmpty()) {
+            throw new IllegalArgumentException("Edges list cannot be null or empty.");
+        }
+        if (outputFilePath == null || outputFilePath.isBlank()) {
+            throw new IllegalArgumentException("Output file path cannot be null or blank.");
+        }
+
         StringBuilder geoJson = new StringBuilder("{ \"type\": \"FeatureCollection\", \"features\": [");
 
         // Add Nodes
         for (Node node : nodes.values()) {
+            if (node == null) {
+                throw new IllegalArgumentException("Nodes map contains a null node.");
+            }
             geoJson.append("{")
                 .append("\"type\": \"Feature\",")
                 .append("\"geometry\": {")
@@ -81,6 +94,9 @@ public class GeoJsonExporter {
 
         // Add Edges
         for (Edge edge : edges) {
+            if (edge == null || edge.getFrom() == null || edge.getTo() == null) {
+                throw new IllegalArgumentException("Edges list contains a null edge or nodes.");
+            }
             geoJson.append("{")
                 .append("\"type\": \"Feature\",")
                 .append("\"geometry\": {")
@@ -102,6 +118,8 @@ public class GeoJsonExporter {
         // Write to file
         try (FileWriter writer = new FileWriter(outputFilePath)) {
             writer.write(geoJson.toString());
+        } catch (IOException e) {
+            throw new IOException("Failed to write GeoJSON to file: " + outputFilePath, e);
         }
     }
 }

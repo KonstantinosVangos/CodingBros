@@ -6,6 +6,104 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HtmlViewerAppSwing",
+            "request": "launch",
+            "mainClass": "com.auebproject.HtmlViewerAppSwing",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "HtmlViewerApp",
+            "request": "launch",
+            "mainClass": "com.auebproject.HtmlViewerApp",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GoogleMapsGeoJsonViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.GoogleMapsGeoJsonViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GeoJSONMapViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.GeoJSONMapViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GeoJSONOnMap",
+            "request": "launch",
+            "mainClass": "com.auebproject.GeoJSONOnMap",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GeoJSONViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.GeoJSONViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "HtmlStringViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.HtmlStringViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "OpenHtmlInBrowser",
+            "request": "launch",
+            "mainClass": "com.auebproject.OpenHtmlInBrowser",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GeoJsonMapApp",
+            "request": "launch",
+            "mainClass": "com.auebproject.GeoJsonMapApp",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "HtmlViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.HtmlViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GoogleMapsViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.GoogleMapsViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "MapViewer",
+            "request": "launch",
+            "mainClass": "com.auebproject.MapViewer",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "GeocodingService",
+            "request": "launch",
+            "mainClass": "com.auebproject.GeocodingService",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "Location",
+            "request": "launch",
+            "mainClass": "com.auebproject.Location",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "com.auebproject.Main",

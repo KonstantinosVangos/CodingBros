@@ -14,6 +14,13 @@ import java.util.Set;
 public class ShortestPath {
 
     public static List<Node> findShortestPath(Node start, Node end, List<Edge> edges) {
+        if (start == null || end == null) {
+            throw new IllegalArgumentException("Start or end node cannot be null.");
+        }
+        if (edges == null || edges.isEmpty()) {
+            throw new IllegalArgumentException("Edges list cannot be null or empty.");
+        }
+
         // Validate edges
         validateEdges(edges);
 
@@ -29,6 +36,10 @@ public class ShortestPath {
 
         start = NodeHandling.findClosestNode(edges, start.lat, start.lon);
         end = NodeHandling.findClosestNode(edges, end.lat, end.lon);
+
+        if (start == null || end == null) {
+            throw new IllegalStateException("Start or end node is not found in the graph.");
+        }
 
         // Initialize distances to infinity and add start node
         distances.put(start, 0.0);
@@ -59,7 +70,11 @@ public class ShortestPath {
         }
 
         // Reconstruct path
-        return reconstructPath(predecessors, start, end);
+        List<Node> path = reconstructPath(predecessors, start, end);
+        if (path.isEmpty()) {
+            throw new NoPathFoundException("No path found between the specified nodes.");
+        }
+        return path;
     }
 
     private static List<Node> reconstructPath(Map<Node, Node> predecessors, Node start, Node end) {
@@ -101,6 +116,10 @@ public class ShortestPath {
     }
 
     public static void checkGraphConnectivity(List<Edge> edges) {
+        if (edges == null || edges.isEmpty()) {
+            throw new IllegalArgumentException("Edges list cannot be null or empty.");
+        }
+
         Map<Node, List<Edge>> adjacencyList = buildAdjacencyList(edges);
         Set<Node> visited = new HashSet<>();
 
@@ -129,6 +148,13 @@ public class ShortestPath {
 
         for (Edge edge : adjacencyList.getOrDefault(current, Collections.emptyList())) {
             dfs(adjacencyList, edge.getTo(), visited);
+        }
+    }
+
+    // Custom exception for no path found
+    public static class NoPathFoundException extends RuntimeException {
+        public NoPathFoundException(String message) {
+            super(message);
         }
     }
 }
