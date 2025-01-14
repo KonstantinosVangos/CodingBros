@@ -1,0 +1,58 @@
+Date : 2025-01-14 17:46:31
+Directory : c:\Users\polan\CodingBros\auebpath\src\main
+Total : 25 files,  7158893 codes, 125 comments, 338 blanks, all 7159356 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| JSON     |          3 |  7,157,606 |          0 |          0 |  7,157,606 |
+| Java     |         20 |      1,231 |        125 |        327 |      1,683 |
+| Markdown |          1 |         34 |          0 |          8 |         42 |
+| HTML     |          1 |         22 |          0 |          3 |         25 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                         | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                            |         25 |  7,158,893 |        125 |        338 |  7,159,356 |
+| java                                                                                         |         21 |      1,265 |        125 |        335 |      1,725 |
+| java\com                                                                                     |         21 |      1,265 |        125 |        335 |      1,725 |
+| java\com\auebproject                                                                         |         21 |      1,265 |        125 |        335 |      1,725 |
+| resources                                                                                    |          4 |  7,157,628 |          0 |          3 |  7,157,631 |
+| resources\data                                                                               |          3 |  7,157,606 |          0 |          0 |  7,157,606 |
+| resources\web                                                                                |          1 |         22 |          0 |          3 |         25 |
++----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                     | language | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\CodeToName.java             | Java     |         54 |          0 |          9 |         63 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\DB.java                     | Java     |         36 |         23 |         24 |         83 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\Edge.java                   | Java     |         24 |          0 |          7 |         31 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\GeoJsonExporter.java        | Java     |        103 |          8 |         14 |        125 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\GeoJsonToHtmlGenerator.java | Java     |         41 |          7 |         12 |         60 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\GeocodingService.java       | Java     |         36 |          5 |          7 |         48 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\HtmlViewerAppSwing.java     | Java     |         29 |          2 |          8 |         39 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\Input.java                  | Java     |         21 |          0 |          3 |         24 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\JSONtoString.java           | Java     |         43 |          0 |          5 |         48 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\Location.java               | Java     |        292 |          0 |         62 |        354 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\Main.java                   | Java     |          7 |          0 |          3 |         10 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\MapCreator.java             | Java     |         73 |          9 |         17 |         99 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\Node.java                   | Java     |         24 |          0 |          7 |         31 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\NodeDistance.java           | Java     |          9 |          0 |          2 |         11 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\NodeHandling.java           | Java     |         86 |          1 |         20 |        107 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\OpenHtmlInBrowser.java      | Java     |         13 |          0 |          3 |         16 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\ShortestPath.java           | Java     |        119 |         14 |         28 |        161 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\UML.md                      | Markdown |         34 |          0 |          8 |         42 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\Url.java                    | Java     |         36 |          6 |         12 |         54 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\User.java                   | Java     |         45 |          9 |         17 |         71 |
+| c:\Users\polan\CodingBros\auebpath\src\main\java\com\auebproject\UserDAO.java                | Java     |        140 |         41 |         67 |        248 |
+| c:\Users\polan\CodingBros\auebpath\src\main\resources\data\athens_transport_data.geojson     | JSON     |  2,524,714 |          0 |          0 |  2,524,714 |
+| c:\Users\polan\CodingBros\auebpath\src\main\resources\data\athens_transport_data3.geojson    | JSON     |  4,632,891 |          0 |          0 |  4,632,891 |
+| c:\Users\polan\CodingBros\auebpath\src\main\resources\data\exported_data.geojson             | JSON     |          1 |          0 |          0 |          1 |
+| c:\Users\polan\CodingBros\auebpath\src\main\resources\web\MapViewer.html                     | HTML     |         22 |          0 |          3 |         25 |
+| Total                                                                                        |          |  7,158,893 |        125 |        338 |  7,159,356 |
++----------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
