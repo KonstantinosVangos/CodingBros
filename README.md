@@ -11,7 +11,7 @@ To compile the application, follow these steps:
 To run the application, follow these steps:
 
 - On Cmd/Cygwin write:
-    "cd auebpath\target"
+    "cd target"
     "java -jar auebpath-1.0-SNAPSHOT.jar"
 
 Application User Instructions:
