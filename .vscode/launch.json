@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "GeoJsonToHtmlGenerator",
+            "request": "launch",
+            "mainClass": "com.auebproject.GeoJsonToHtmlGenerator",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
+            "name": "OpenHtmlFile",
+            "request": "launch",
+            "mainClass": "com.auebproject.OpenHtmlFile",
+            "projectName": "auebpath"
+        },
+        {
+            "type": "java",
             "name": "HtmlViewerAppSwing",
             "request": "launch",
             "mainClass": "com.auebproject.HtmlViewerAppSwing",

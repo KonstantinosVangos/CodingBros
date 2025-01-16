@@ -1,14 +1,30 @@
 package com.auebproject;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GeoJsonToHtmlGenerator {
 
-    public static void generateHtml(String geoJsonFilePath, String outputHtmlFilePath) {
-        // HTML template with a placeholder for the GeoJSON data
+    private static Path lastMapViewerFilePath;
+
+    public static Path getLastMapViewerFilePath() {
+        return lastMapViewerFilePath;
+    }
+
+    // File paths for the GeoJSON and output HTML
+    public static Path getGeoJsonFilePath() throws URISyntaxException {
+        return GeoJsonExporter.getLastExportedFilePath();
+    }
+    /* 
+    public static Path getOutputHtmlFilePath() throws URISyntaxException {
+        return Paths.get(GeoJsonToHtmlGenerator.class.getResource("/web/MapViewer.html").toURI());
+    }*/
+
+    public static void generateHtml() {
         String htmlTemplate = """
                 <!DOCTYPE html>
                 <html>
@@ -21,10 +37,10 @@ public class GeoJsonToHtmlGenerator {
                                 center: { lat: 37.9838, lng: 23.7275 },
                                 zoom: 12,
                             });
-
+    
                             // GeoJSON data
                             const geoJsonData = %%GEOJSON_DATA%%;
-
+    
                             // Add GeoJSON to the map
                             map.data.addGeoJson(geoJsonData);
                         }
@@ -35,25 +51,24 @@ public class GeoJsonToHtmlGenerator {
                 </body>
                 </html>
                 """;
-
+    
         try {
-            // Read the GeoJSON file content
-            String geoJsonData = Files.readString(Paths.get(geoJsonFilePath));
-
-            // Remove escape characters and ensure JSON is embedded as a raw object
-            String rawGeoJson = geoJsonData;
-
-            // Replace the placeholder in the HTML template with the raw GeoJSON
-            String finalHtml = htmlTemplate.replace("%%GEOJSON_DATA%%", rawGeoJson);
-
-            // Write the final HTML to the output file
-            Files.writeString(Path.of(outputHtmlFilePath), finalHtml);
-
-            System.out.println("HTML file created: " + outputHtmlFilePath);
-        } catch (IOException e) {
+            Path geoJsonPath = getGeoJsonFilePath();
+            String geoJsonData = Files.readString(geoJsonPath);
+    
+            // Escape GeoJSON data
+            //String escapedGeoJsonData = geoJsonData.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
+            String finalHtml = htmlTemplate.replace("%%GEOJSON_DATA%%", geoJsonData);
+    
+            lastMapViewerFilePath = Files.createTempFile("exported_graph", ".html");
+            try (FileWriter writer = new FileWriter(lastMapViewerFilePath.toFile())) {
+                writer.write(finalHtml);
+            }
+    
+            System.out.println("HTML file created: " + lastMapViewerFilePath);
+        } catch (IOException | URISyntaxException e) {
+            System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
-            System.out.println("Failed to generate HTML file.");
         }
-    }
+    }    
 }
-

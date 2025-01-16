@@ -1,7 +1,6 @@
 com\auebproject\Location$3.class
 com\auebproject\CodeToName.class
 com\auebproject\DB.class
-com\auebproject\GoogleMapsGeoJsonViewer.class
 com\auebproject\NodeHandling.class
 com\auebproject\User.class
 com\auebproject\MapCreator.class

@@ -10,12 +10,10 @@ public class Input {
             List<Edge> edges = MapCreator.parseEdgesFromGeoJson();
             var asoee = new Node("asoee", 37.994124, 23.731996);
             var input = new Node("t1", latLon[0], latLon[1]);
-            String outputFilePath = "auebpath\\src\\main\\resources\\data\\exported_data.geojson";
-            String outputHtmlFilePath = "auebpath\\src\\main\\resources\\web\\MapViewer.html";
-            GeoJsonExporter.exportShortestPathToGeoJson(ShortestPath.findShortestPath(asoee, input, edges), outputFilePath);
-            GeoJsonToHtmlGenerator.generateHtml(outputFilePath, outputHtmlFilePath);
+            GeoJsonExporter.exportShortestPathToGeoJson(ShortestPath.findShortestPath(asoee, input, edges));
+            GeoJsonToHtmlGenerator.generateHtml();
             Thread.sleep(1000);
-            OpenHtmlInBrowser.openHtml();
+            OpenHtmlFile.openHtml();
         } catch (Exception e) {
             e.printStackTrace();
         }

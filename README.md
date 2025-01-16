@@ -4,9 +4,15 @@ AuebPath is an application designed to optimize roots to and from the Athens Uni
 
 To compile the application, follow these steps:
 
+- On VisualStudio Code Terminal write:
+    "cd path_to_CodingBros\auebpath"
+    "mvn package" 
 
 To run the application, follow these steps:
 
+- On Cmd/Cygwin write:
+    "cd path_to_CodingBros\auebpath\target"
+    "java -jar auebpath-1.0-SNAPSHOT.jar"
 
 Application User Instructions:
 
