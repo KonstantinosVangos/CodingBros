@@ -172,8 +172,7 @@ Overview of data structures and algorithms used by the application:
     dfs(Map<Node, List<Edge>> adjacencyList, Node current, Set<Node> visited): A recursive depth-first search used to explore the graph and mark nodes as visited. This is used in checkGraphConnectivity to ensure all nodes are reachable.
     findShortestPath(Node start, Node end, List<Edge> edges): Implements Dijkstra's algorithm to find the shortest path between the start and end nodes. The algorithm works by processing nodes based on their distance from the start node, updating the distances to neighbors if a shorter path is found. The priority queue ensures that the      next node to process is always the one with the shortest distance.
     
-The UML Diagram is:
-
+The UML Diagram is (Copy the code in mermaid to see the full Diagram):
 ```mermaid
     classDiagram
     class CodeToName {
